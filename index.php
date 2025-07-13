@@ -1,39 +1,26 @@
 <?php
-  session_start();
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $_SESSION["level"] = $_POST["level"];
-    header("Location: case.php");
-    exit();
-  }
+session_start();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cryptic Quest - Home</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Cryptic Quest</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>🔍 Welcome to Cryptic Quest</h1>
-    <p class="intro">Use your logic to solve mysterious cases. Choose your difficulty and begin the quest.</p>
-
-    <form action="index.php" method="post">
-      <div class="difficulty">
-        <label for="level">Select Difficulty:</label>
-        <select name="level" id="level" required>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-      </div>
-
-      <div class="mystery-prompt">
-        <p><strong>Today's Mystery:</strong> A priceless painting has vanished from the city museum. Can you solve it?</p>
-      </div>
-
-      <input type="submit" class="start-btn" value="▶️ Start Game">
+    <h1>Welcome to Mystery Quest</h1>
+    <form method="post" action="case.php">
+      <label for="username">Enter your name:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="level">Select difficulty:</label>
+      <select id="level" name="level">
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
+      <input type="submit" value="Start Game" class="start-btn">
     </form>
   </div>
 </body>
