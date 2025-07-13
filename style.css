@@ -9,37 +9,41 @@ body {
 }
 
 .container {
+  width: 95%;
   max-width: 800px;
-  max-height: 600px;
-  margin: 50px auto;
+  margin: 40px auto;
   background: #28293d;
-  padding: 20px;
+  padding: 50px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   border-radius: 8px;
+  font-size: 20px;
 }
 
 h1 {
   text-align: center;
   color: #fff;
-  margin-bottom: 20px;
+  font-size: 28px;
+  margin-bottom: 25px;
 }
 
 label {
   display: block;
   font-weight: bold;
   color: #ccc;
-  margin-bottom: 5px;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 input[type="text"],
 select {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 14px;
+  margin-bottom: 20px;
   border: 1px solid #444;
   border-radius: 4px;
   background: #1e1e2e;
   color: #ccc;
+  font-size: 18px;
 }
 
 .start-btn,
@@ -48,28 +52,31 @@ input[type="submit"] {
   background: #e94560;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 14px 28px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 18px;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .start-btn:hover,
 input[type="submit"]:hover {
   background: #d23f5b;
+  transform: scale(1.08);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin: 25px 0;
+  font-size: 18px;
 }
 
 th,
 td {
   border: 1px solid #444;
-  padding: 10px;
+  padding: 12px;
   text-align: left;
 }
 
@@ -88,4 +95,14 @@ tr:nth-child(odd) {
 
 td {
   color: #ddd;
+}
+
+.feedback-correct {
+  color: #00ff88;
+  font-weight: bold;
+}
+
+.feedback-wrong {
+  color: #ff4e4e;
+  font-weight: bold;
 }

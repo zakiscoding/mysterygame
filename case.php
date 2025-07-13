@@ -16,10 +16,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["level"])) {
 $username   = $_COOKIE["username"] ?? "Guest";
 $difficulty = $_SESSION["level"]      ?? "Easy";
 
-
 if (!isset($_SESSION["mystery_text"], $_SESSION["correct_answer"])) {
     $api_key = "AIzaSyDgtLMw4rVs-OhpiZOYqawSzVCBPkF1VNw";
-    $prompt  = "Write a short (about 200 word that each senetnce make sense with the previos one) mystery quest, use as much words u need to make it undertandable and leave clues in the propmt what the answer is but dont make it to long. Describe a disappearance, stolen object, or strange scene with clues that feel like part of a detective case. End the riddle with a question that fits naturally with the story — such as ‘Who took it?’, ‘Where did it go?’, or ‘Who left this behind?’ Make sure the question matches the mystery. make sure u give the choice in multple choice format is a, b, c, or d. make sure the choice matches the question. make sure the choices matches the prompt. take your time to generate this prompt itv has to be perfect evrytime. Please make the prompt make sense after ur done genrated it make sure it flows and makes sense with the answer check as much times u need and change it if u have to.At the end, make sure the answer is one of the choices then include the correct answer in this format: 'Answer: ___'";
+
+    $difficulty = strtolower($_SESSION["level"] ?? "easy");
+    switch ($difficulty) {
+        case "easy":
+            $prompt = "Write a short (about 200 words, each sentence making sense with the previous one) mystery quest. It should be beginner-friendly and very clear. Use a simple situation like a lost or stolen object. Leave easy-to-spot clues. Format the ending as a natural question like 'Who took it?' or 'Where did it go?' followed by multiple-choice options a, b, c, or d. The answer should be obvious for an attentive reader. End the story with 'Answer: ___'. Make sure the mystery flows and makes sense with the answer.";
+            break;
+        case "medium":
+            $prompt = "Write a medium-difficulty (about 200 words) mystery quest with logical flow. Describe a situation involving a theft, strange scene, or disappearance. Leave multiple clues and small distractions, but the answer should still be solvable. Use a story structure where the reader can deduce the answer. End with a natural question matching the case and four multiple-choice answers (a, b, c, d). Ensure the correct answer is one of the choices and end with 'Answer: ___'.";
+            break;
+        case "hard":
+            $prompt = "Write a complex, well-structured (about 200 words or more if needed) mystery quest. The story should have subtle clues, red herrings, and high reasoning. Involve a deep case like a hidden betrayal, clever misdirection, or a sophisticated theft. Make the question at the end blend naturally into the story — such as 'Who was behind it?' or 'What explains the mystery?' Include four realistic multiple-choice answers (a, b, c, d), and end with 'Answer: ___'. The mystery must make sense, flow well, and the answer must logically match the story.";
+            break;
+        default:
+            $prompt = "Write a general mystery story involving a theft or disappearance with clues, and provide a multiple-choice question and answer at the end. End with 'Answer: ___'.";
+    }
+
     unset($_SESSION["score_saved"]);
 
     $data = [
@@ -60,7 +74,7 @@ $user_answer = $_POST["answer"] ?? null;
 $tries       = (int)($_COOKIE["tries"] ?? 0);
 $message     = "";
 $show_answer = false;
-
+$is_correct  = false;
 
 if ($user_answer !== null) {
     $is_correct = strtolower(trim($user_answer)) === strtolower($correct_answer);
@@ -115,6 +129,7 @@ if ($user_answer !== null) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,14 +139,16 @@ if ($user_answer !== null) {
 </head>
 <body>
   <div class="container">
-    <h1>Mystery Case – <?=htmlspecialchars($difficulty)?> Mode</h1>
+    <h1>Mystery Case – <?=htmlspecialchars(ucfirst($difficulty))?> Mode</h1>
     <p><?=nl2br(htmlspecialchars($mystery_text))?></p>
 
     <?php if($message): ?>
-      <p><?=$message?></p>
+      <p class="<?= $is_correct ? 'feedback-correct' : 'feedback-wrong' ?>">
+        <?=$message?>
+      </p>
     <?php endif; ?>
 
-    <?php if(!$show_answer): ?>
+    <?php if(!$show_answer && !$is_correct): ?>
       <form method="post">
         <label for="answer">Your Answer (Enter a, b, c, d):</label>
         <input type="text" name="answer" id="answer" required>
