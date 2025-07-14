@@ -1,108 +1,186 @@
 body {
-  font-family: Arial, sans-serif;
-  background: url(backgound.jpeg);
-  background-size: 110% auto;
-  background-repeat: no-repeat;
-  color: #ddd;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #23233b url("backgound.jpeg") no-repeat center center fixed;
+  background-size: cover;
   margin: 0;
   padding: 0;
+  color: #fff;
 }
 
 .container {
-  width: 95%;
-  max-width: 800px;
+  max-width: 500px;
   margin: 40px auto;
-  background: #28293d;
-  padding: 50px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  border-radius: 8px;
-  font-size: 20px;
+  background: rgba(28, 28, 50, 0.98);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(14, 14, 32, 0.35);
+  padding: 36px 28px 28px 28px;
+}
+
+h1, h2 {
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 h1 {
-  text-align: center;
-  color: #fff;
-  font-size: 28px;
-  margin-bottom: 25px;
+  margin-top: 0;
+  font-size: 2.3em;
+  color: #e94560;
 }
 
-label {
-  display: block;
-  font-weight: bold;
-  color: #ccc;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-input[type="text"],
-select {
-  width: 100%;
-  padding: 14px;
+h2 {
+  color: #ffd369;
   margin-bottom: 20px;
-  border: 1px solid #444;
-  border-radius: 4px;
-  background: #1e1e2e;
-  color: #ccc;
-  font-size: 18px;
+  font-size: 1.3em;
 }
 
-.start-btn,
-input[type="submit"] {
-  display: inline-block;
-  background: #e94560;
-  color: #fff;
-  border: none;
-  padding: 14px 28px;
-  cursor: pointer;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+input[type="text"], select {
+  padding: 12px 16px;
+  border: 2px solid #393e46;
   border-radius: 6px;
-  text-decoration: none;
-  font-size: 18px;
-  transition: transform 0.3s ease, background 0.3s ease;
+  background: #23233b;
+  color: #fff;
+  font-size: 1em;
+  margin-bottom: 4px;
+  outline: none;
 }
 
-.start-btn:hover,
-input[type="submit"]:hover {
-  background: #d23f5b;
-  transform: scale(1.08);
+input[type="submit"], .start-btn {
+  padding: 12px 28px;
+  background: linear-gradient(90deg, #e94560 0%, #ffd369 100%);
+  border: none;
+  color: #23233b;
+  border-radius: 24px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 12px 0 rgba(233, 69, 96, 0.18);
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  margin: 10px 0 0 0;
+  display: inline-block;
+}
+
+input[type="submit"]:hover, .start-btn:hover {
+  background: linear-gradient(90deg, #ffd369 0%, #e94560 100%);
+  color: #23233b;
+  transform: scale(1.06);
 }
 
 table {
   width: 100%;
+  margin: 20px 0;
   border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 18px;
+  background: rgba(36, 36, 65, 0.94);
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 1em;
 }
 
-th,
-td {
-  border: 1px solid #444;
-  padding: 12px;
+th, td {
+  padding: 12px 8px;
   text-align: left;
 }
 
 th {
-  background-color: #444;
+  background: #e94560;
   color: #fff;
-}
-
-tr:nth-child(even) {
-  background-color: #2b2c3f;
-}
-
-tr:nth-child(odd) {
-  background-color: #28293d;
+  font-weight: 600;
+  letter-spacing: 0.7px;
 }
 
 td {
-  color: #ddd;
+  color: #ffd369;
+  background: #23233b;
 }
 
-.feedback-correct {
-  color: #00ff88;
-  font-weight: bold;
+tr:nth-child(even) td {
+  background: #28284b;
 }
 
-.feedback-wrong {
-  color: #ff4e4e;
-  font-weight: bold;
+a {
+  color: #ffd369;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+
+a:hover {
+  color: #e94560;
+}
+
+.error {
+  color: #ff5252;
+  background: #fff1f1;
+  border: 1px solid #ffdddd;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 12px 0;
+}
+
+.success {
+  color: #21e675;
+  background: #eaffed;
+  border: 1px solid #b7ffd9;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 12px 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+input[type="text"],
+select {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+input[type="text"]:focus,
+select:focus {
+  border-color: #e94560;
+  transform: scale(1.02);
+}
+
+
+tr {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+tr:hover {
+  background-color: #3a3b5f;
+  transform: translateX(5px);
+}
+
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+.start-btn,
+input[type="submit"] {
+  animation: pulse 3s ease-in-out infinite;
+}
+.start-btn:hover,
+input[type="submit"]:hover {
+  animation-play-state: paused;
 }
